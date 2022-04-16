@@ -1,5 +1,4 @@
 from http import HTTPStatus
-
 from django.test import Client, TestCase
 
 
@@ -12,8 +11,8 @@ class StaticPagesURLTests(TestCase):
         response = self.guest_client.get('/')
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
-        response = self.guest_client.get('/second/')
-        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
+        response = self.guest_client.get('/second_page/')
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_page_shows_correct_content(self):
         """Проверка контента страниц."""
