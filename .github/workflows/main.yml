@@ -48,6 +48,7 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/infra-action:latest
+
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
@@ -62,4 +63,15 @@ jobs:
         script: |
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/infra-action
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/infra-action 
+          sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/infra-action
+  
+  send message:
+    runs-on: ubuntu-latest
+    needs: deply
+    steps:
+      - name: send message
+        uses: appleboy/telegram-action@master
+        with: |
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_ID }}
+          message: ${{ github.workflow }} успешно выполнен! 
