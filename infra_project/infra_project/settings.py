@@ -17,7 +17,7 @@ SECRET_KEY = 'abcdefg12345'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['51.250.104.248']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
