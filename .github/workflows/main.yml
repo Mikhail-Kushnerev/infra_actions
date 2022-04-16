@@ -71,7 +71,7 @@ jobs:
     steps:
       - name: send message
         uses: appleboy/telegram-action@master
-        with: |
+        with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_ID }}
           message: ${{ github.workflow }} успешно выполнен! 
